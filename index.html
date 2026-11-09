@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup Solusi 2 Fase A — Modul Feedback Kinerja SMILE-HC</title>
+<style>
+body{margin:0;background:#F3F5F8;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1B2430}
+*{box-sizing:border-box}
+.mk-bar{position:sticky;top:0;z-index:10;background:#0B2545;color:#fff;padding:10px 20px;display:flex;flex-direction:column;gap:8px}
+.mk-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mk-title{font-size:14px;font-weight:700}
+.mk-sub{font-size:12.5px;color:#B9C7DA}
+.mk-spacer{flex:1}
+.mk-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:6px;padding:6px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.mk-btn:hover{background:rgba(255,255,255,.2)}
+.mk-btn:disabled{opacity:.4;cursor:default}
+.mk-sel{background:#fff;color:#1B2430;border:none;border-radius:6px;padding:6px 10px;font:inherit;font-size:13px;max-width:100%}
+.mk-chips{display:flex;gap:6px;flex-wrap:wrap}
+.mk-grp{font-size:11.5px;color:#B9C7DA;font-weight:700;margin:0 2px 0 8px;align-self:center}
+.mk-grp:first-child{margin-left:0}
+.mk-chip{background:transparent;border:1px solid rgba(255,255,255,.3);color:#DCE6F2;border-radius:999px;padding:3px 10px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.mk-chip.on{background:#fff;color:#0B2545;border-color:#fff}
+.board{display:none;min-height:calc(100vh - 92px);flex-direction:column}
+.board.on{display:flex}
+.app-h{background:#fff;border-bottom:1px solid #D8DEE6;padding:0 24px;min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.app-brand{display:flex;align-items:baseline;gap:10px}
+.app-brand b{font-size:20px;font-weight:800;color:#0B3F78}
+.app-brand span{font-size:13px;color:#566170}
+.app-user{font-size:13px;color:#33404F}
+.app-body{display:flex;flex-wrap:wrap;flex:1}
+.app-nav{flex:0 0 232px;padding:20px 16px;background:#fff;border-right:1px solid #D8DEE6;display:flex;flex-direction:column;gap:4px}
+.nav{display:block;padding:11px 14px;border-radius:8px;font-size:14px;color:#33404F;text-decoration:none}
+.nav[data-go]{cursor:pointer}
+.nav-on{background:#E3EEFA;color:#0B3F78;font-weight:700}
+.nav-h{font-size:12px;font-weight:700;color:#566170;letter-spacing:.04em;padding:10px 14px 4px;text-transform:uppercase}
+.app-main{flex:999 1 560px;min-width:0;padding:28px 32px;max-width:1048px;display:flex;flex-direction:column;gap:20px}
+.crumb{font-size:13px;color:#566170;margin-bottom:6px}
+.h1{margin:0;font-size:26px}
+.lead{margin:8px 0 0;font-size:14px;color:#33404F;line-height:1.55;max-width:780px}
+.card{background:#fff;border:1px solid #D8DEE6;border-radius:10px;padding:24px}
+.h2{margin:0 0 4px;font-size:17px;font-weight:700}
+.hint{margin:0 0 16px;font-size:13px;color:#566170;line-height:1.5}
+.lbl{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.in{width:100%;border:1px solid #AEB8C4;border-radius:8px;padding:10px 12px;font:inherit;font-size:14px;color:#1B2430;background:#fff}
+.in-chg{border-color:#0B5CAD;background:#EEF5FD;box-shadow:inset 0 0 0 1px #0B5CAD}
+.btn{border:1px solid #AEB8C4;background:#fff;color:#1B2430;border-radius:8px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;min-height:44px;cursor:pointer}
+.btn-p{background:#0B5CAD;border-color:#0B5CAD;color:#fff}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px}
+.p-amber{background:#FFF4D6;color:#5A3F00}
+.p-green{background:#E6F4EA;color:#1E6B3F}
+.p-gray{background:#E8ECF1;color:#33404F}
+.p-red{background:#FDECEA;color:#8A1C14}
+.p-blue{background:#E3EEFA;color:#0B3F78}
+.k{font-size:12.5px;color:#566170;font-weight:700;margin-bottom:4px}
+.v{font-size:14px;margin:0}
+.big{font-size:28px;font-weight:800;margin:0}
+.sub{font-size:13px;color:#566170}
+.muted{color:#566170}
+.small{font-size:12.5px;color:#566170;line-height:1.5}
+.due{font-size:12.5px;color:#8A4B00;font-weight:700}
+.note{font-size:12.5px;color:#566170;margin-top:10px;line-height:1.5}
+.foot{font-size:13px;color:#566170;line-height:1.55;max-width:780px}
+.count{text-align:right;font-size:12px;color:#566170;margin-top:4px}
+.warn{background:#FFF4D6;border:1px solid #E5C77A;border-radius:10px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.warn-t{font-size:14px;font-weight:700;color:#5A3F00}
+.warn-b{font-size:13px;line-height:1.55;color:#4A3500}
+.info{background:#E3EEFA;border:1px solid #9CC0E6;border-radius:8px;padding:12px 16px;font-size:13.5px;line-height:1.55;color:#0B3F78}
+.soft{background:#F5F7FA;border:1px solid #D8DEE6;border-radius:10px;padding:14px 18px;font-size:13px;line-height:1.6;color:#33404F}
+.box{background:#F5F7FA;border:1px solid #D8DEE6;border-radius:8px;padding:14px 16px;font-size:14px;line-height:1.6;margin:0}
+.hid{border:1.5px dashed #AEB8C4;border-radius:8px;padding:10px 14px;font-size:13px;color:#566170;line-height:1.5}
+.grid-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 24px}
+.actions{display:flex;gap:12px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.actions-note{font-size:13px;color:#566170;margin-right:auto}
+.ul{margin:0;padding-left:20px;font-size:14px;line-height:1.7;color:#33404F}
+.tag{display:inline-block;font-size:12px;font-weight:800;background:#0B3F78;color:#fff;border-radius:6px;padding:3px 9px;margin-right:8px}
+.opt{display:flex;gap:10px;align-items:center;border:1px solid #C9D2DC;border-radius:10px;padding:12px 16px;min-height:44px;font-size:14px;background:#fff}
+.opt-on{border-color:#0B5CAD;background:#EEF5FD;box-shadow:inset 0 0 0 1px #0B5CAD}
+.chk{display:flex;gap:12px;align-items:center;min-height:44px;font-size:14px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.row > div{flex:1 1 220px}
+.stat{flex:1 1 220px;border:1px solid #D8DEE6;border-radius:10px;padding:16px 18px;background:#fff}
+.stat.sm{flex:1 1 170px;padding:14px 16px}
+.stat-k{font-size:12.5px;color:#566170;font-weight:700}
+.stat-v{font-size:26px;font-weight:800;margin-top:4px}
+.stat.sm .stat-v{font-size:24px}
+.stat-s{font-size:12.5px;color:#566170;margin-top:2px}
+.tb{width:100%;border-collapse:collapse;min-width:960px}
+.tb th{text-align:left;font-size:12.5px;color:#566170;font-weight:700;padding:10px 12px;border-bottom:1px solid #D8DEE6;background:#F7F9FB}
+.tb td{padding:12px;border-bottom:1px solid #E6EAF0;font-size:14px;vertical-align:top}
+.tb-mid{min-width:760px}
+.tb-mid td{vertical-align:middle}
+.kt{width:100%;border-collapse:collapse;min-width:720px}
+.kt th{text-align:left;font-size:12.5px;color:#566170;font-weight:700;padding:10px 12px;border-bottom:1px solid #D8DEE6;background:#F7F9FB}
+.kt td{padding:12px;border-bottom:1px solid #E6EAF0;font-size:14px;vertical-align:top}
+@media (max-width:800px){.app-nav{display:none}.app-main{padding:20px 16px}.mk-chips{display:none}}
+</style>
+</head>
+<body>
+<div class="mk-bar">
+  <div class="mk-row">
+    <span class="mk-title">Mockup Solusi 2 Fase A · Modul Feedback Kinerja (BRD 2.1.3)</span>
+    <span class="mk-sub">Draf visual untuk diskusi. Nama, angka, dan tanggal adalah contoh fiktif. Hal yang belum disetujui diberi tanda perlu konfirmasi.</span>
+  </div>
+  <div class="mk-row">
+    <button class="mk-btn" id="prev" type="button" aria-label="Board sebelumnya">‹ Sebelumnya</button>
+    <select class="mk-sel" id="pick" aria-label="Pilih board"><option value="1">1. Atasan: Antrean Feedback Kinerja</option><option value="2">2. Atasan: Form Feedback TW III (panel data belum final)</option><option value="3">3. Atasan: Empat Kondisi Panel Data (a sampai d)</option><option value="4">4. Atasan: Pengesahan Pengiriman</option><option value="5">5. Pegawai: Baca Feedback dan Tanggapi</option><option value="6">6. Atasan: Penyampaian Predikat</option><option value="7">7. PIC HCP: Pemantauan dan Analisis AI</option><option value="8">8. PIC HCP: Detail Catatan, Hasil AI, Kategori Opsional</option><option value="9">9. Admin: Pengaturan Jendela, Pengingat, dan Batch AI</option><option value="10">10. Atasan: Riwayat Bawahan dan Atasan Pengganti</option><option value="11">11. PIC HCP: Pengaturan Aturan Analisis AI</option></select>
+    <button class="mk-btn" id="next" type="button" aria-label="Board berikutnya">Berikutnya ›</button>
+    <span class="mk-spacer"></span>
+    <div class="mk-chips"><span class="mk-grp">Atasan</span><button class="mk-chip" data-go="1" title="Antrean Feedback Kinerja">1</button><button class="mk-chip" data-go="2" title="Form Feedback TW III (panel data belum final)">2</button><button class="mk-chip" data-go="3" title="Empat Kondisi Panel Data (a sampai d)">3</button><button class="mk-chip" data-go="4" title="Pengesahan Pengiriman">4</button><button class="mk-chip" data-go="6" title="Penyampaian Predikat">6</button><button class="mk-chip" data-go="10" title="Riwayat Bawahan dan Atasan Pengganti">10</button><span class="mk-grp">Pegawai</span><button class="mk-chip" data-go="5" title="Baca Feedback dan Tanggapi">5</button><span class="mk-grp">PIC HCP</span><button class="mk-chip" data-go="7" title="Pemantauan dan Analisis AI">7</button><button class="mk-chip" data-go="8" title="Detail Catatan, Hasil AI, Kategori Opsional">8</button><button class="mk-chip" data-go="11" title="Pengaturan Aturan Analisis AI">11</button><span class="mk-grp">Admin</span><button class="mk-chip" data-go="9" title="Pengaturan Jendela, Pengingat, dan Batch AI">9</button></div>
+  </div>
+</div>
+<section class="board" id="bd-1" data-n="1" aria-label="Antrean Feedback Kinerja">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan B (contoh) · Atasan langsung</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="1">Feedback Kinerja</a>
+      <a class="nav" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Antrean</div>
+        <h1 class="h1">Antrean Feedback Kinerja</h1>
+        <p class="lead">Satu catatan per bawahan untuk setiap kegiatan. Antrean diurutkan menurut tenggat terdekat. Persetujuan penilaian KPI bukan syarat untuk membuka atau mengirim feedback.</p>
+      </div>
+
+      <div class="warn">
+        <div class="warn-t">Tenggat TW III 2026: 30 Okt 2026 (sisa 1 hari). 4 bawahan masih berstatus Belum.</div>
+        <div class="warn-b">Feedback yang dikirim setelah tenggat tetap diterima dengan penanda terlambat sampai batas akhir pengiriman terlambat (usulan 30 hari kalender setelah tenggat, perlu konfirmasi). Setelah batas itu statusnya menjadi Tidak Dilaksanakan.</div>
+      </div>
+
+      <section style="display:flex;gap:16px;flex-wrap:wrap">
+        <div class="stat" style="flex:2 1 360px">
+          <div class="stat-k">Progres TW III 2026 · jendela 1 Sep sampai 30 Okt 2026</div>
+          <div class="stat-v">9 dari 13 bawahan <span style="font-size:15px;font-weight:600;color:#566170">sudah diberi feedback</span></div>
+          <div style="height:10px;background:#E6EAF0;border-radius:999px;margin-top:10px;overflow:hidden"><div style="width:69%;height:100%;background:#0B5CAD"></div></div>
+          <div class="stat-s">1 bawahan berstatus Tidak Berlaku tidak dihitung pada penyebut.</div>
+        </div>
+        <div class="stat"><div class="stat-k">Belum</div><div class="stat-v">4</div><div class="stat-s">tenggat 30 Okt 2026</div></div>
+        <div class="stat"><div class="stat-k">Terkirim</div><div class="stat-v">9</div><div class="stat-s">status pelaksanaan milik Anda</div></div>
+        <div class="stat"><div class="stat-k">Tidak Berlaku</div><div class="stat-v">1</div><div class="stat-s">dengan alasan tercatat</div></div>
+      </section>
+
+      <section class="card">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 220px"><label class="lbl" for="keg">Kegiatan</label><select class="in" id="keg"><option>TW III 2026</option><option>Revisi Predikat 2025</option><option>Semua kegiatan berjalan</option></select></div>
+          <div style="flex:1 1 220px"><label class="lbl" for="st">Status pelaksanaan</label><select class="in" id="st"><option>Semua</option><option>Belum</option><option>Terkirim</option><option>Terkirim Terlambat</option><option>Tidak Dilaksanakan</option><option>Tidak Berlaku</option></select></div>
+          <div style="flex:2 1 280px"><label class="lbl" for="cari">Cari nama bawahan</label><input class="in" id="cari" type="search" placeholder="Ketik nama"></div>
+        </div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="overflow-x:auto">
+          <table class="tb">
+            <thead><tr><th>Bawahan</th><th>Kegiatan</th><th>Tenggat</th><th>Status pelaksanaan</th><th>Data kinerja pada panel</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><div style="font-weight:700">Pegawai C (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026<div class="due">sisa 1 hari</div></td><td><span class="pill p-amber">Belum</span></td><td>KPI ditetapkan, belum final</td><td><button class="btn btn-p" type="button" data-go="2">Isi feedback</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai D (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026<div class="due">sisa 1 hari</div></td><td><span class="pill p-amber">Belum</span></td><td>KPI belum ditetapkan</td><td><button class="btn btn-p" type="button" data-go="2">Isi feedback</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai E (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026<div class="due">sisa 1 hari</div></td><td><span class="pill p-amber">Belum</span></td><td>Penilaian final</td><td><button class="btn btn-p" type="button" data-go="2">Isi feedback</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai F (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026<div class="due">sisa 1 hari</div></td><td><span class="pill p-amber">Belum</span></td><td>KPI ditetapkan, belum final</td><td><button class="btn btn-p" type="button" data-go="2">Isi feedback</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai A (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026</td><td><span class="pill p-green">Terkirim</span><div class="sub" style="margin-top:4px">27 Okt 2026</div></td><td>KPI ditetapkan, belum final</td><td><button class="btn" type="button">Lihat</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai G (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026</td><td><span class="pill p-green">Terkirim</span><div class="sub" style="margin-top:4px">20 Okt 2026</div></td><td>Penilaian final</td><td><button class="btn" type="button">Lihat</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai H (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026</td><td><span class="pill p-green">Terkirim</span><div class="sub" style="margin-top:4px">14 Okt 2026</div></td><td>KPI belum ditetapkan</td><td><button class="btn" type="button">Lihat</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai J (contoh)</div><div class="sub">[Jabatan]</div></td><td>TW III 2026</td><td>30 Okt 2026</td><td><span class="pill p-gray">Tidak Berlaku</span><div class="sub" style="margin-top:4px;max-width:220px">Alasan: berada di bawah atasan ini kurang dari 7 minggu pada triwulan (jumlah minggu perlu konfirmasi)</div></td><td>Penilaian final</td><td><button class="btn" type="button">Lihat alasan</button></td></tr>
+              <tr><td><div style="font-weight:700">Pegawai A (contoh)</div><div class="sub">[Jabatan]</div></td><td>Revisi Predikat 2025<div class="sub">tertaut ke Penyampaian Predikat 2025</div></td><td>12 Nov 2026<div class="sub">sisa 13 hari</div></td><td><span class="pill p-amber">Belum</span></td><td>Level predikat berubah</td><td><button class="btn btn-p" type="button" data-go="6">Isi feedback</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="foot">Atasan hanya melihat status pelaksanaan miliknya (Belum, Terkirim, Terkirim Terlambat, Tidak Dilaksanakan, atau Tidak Berlaku). Status tanggapan pegawai, pilihan Setuju atau Tidak Setuju, alasannya, dan hasil analisis AI tidak ditampilkan kepada atasan. Atasan yang sudah mengirim tetap berstatus Terkirim walaupun pegawai belum menanggapi.</div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-2" data-n="2" aria-label="Form Feedback TW III (panel data belum final)">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan B (contoh) · Atasan langsung</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="1">Feedback Kinerja</a>
+      <a class="nav" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Antrean / Pegawai C</div>
+        <h1 class="h1">Form Feedback Kinerja TW III 2026</h1>
+      </div>
+
+      <div class="warn">
+        <div class="warn-t">Pemberitahuan kerahasiaan dan pemrosesan AI</div>
+        <div class="warn-b">Isi feedback bersifat rahasia. Dialog tidak direkam. Teks yang Anda tulis dan tanggapan pegawai dapat diproses sistem kecerdasan buatan sebagai sinyal awal bagi PIC HCP, bukan sebagai dasar penetapan predikat, mutasi, atau keputusan kepegawaian lainnya.</div>
+      </div>
+
+      <section class="card grid-kv">
+        <div><div class="k">Pegawai</div><p class="v">Pegawai C (contoh)</p></div>
+        <div><div class="k">Posisi dan unit kerja</div><p class="v">[Jabatan] · [Unit kerja]</p></div>
+        <div><div class="k">Atasan langsung</div><p class="v">Atasan B (contoh)</p></div>
+        <div><div class="k">Kegiatan</div><p class="v">TW III 2026 · Feedback Kinerja</p></div>
+        <div><div class="k">Jendela</div><p class="v">1 Sep sampai 30 Okt 2026</p></div>
+        <div><div class="k">Status pelaksanaan</div><p class="v"><span class="pill p-amber">Belum</span></p></div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">1. Data kinerja pegawai (hanya baca)</h2>
+        <p class="hint">Dibaca dari modul Pengelolaan Kinerja pada saat form dibuka. Modul ini tidak menghitung nilai maupun predikat. Data dibekukan sebagai snapshot saat feedback dikirim.</p>
+        <div class="info" style="margin-bottom:16px"><b>KPI sudah ditetapkan, penilaian triwulan belum final.</b> Realisasi yang sudah diinput tampil dengan label belum disetujui. Indikator tanpa realisasi ditandai belum tersedia. Angka di bawah ini bukan nilai akhir.</div>
+        <div style="overflow-x:auto">
+          <table class="kt">
+            <thead><tr><th>Indikator KPI</th><th>Bobot</th><th>Target</th><th>Realisasi</th><th>Satuan</th><th>Unit pemilik data</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>Kepatuhan pelaporan tepat waktu</td><td>30%</td><td>100</td><td>96</td><td>persen</td><td>[Unit]</td><td><span class="pill p-amber">belum disetujui</span></td></tr>
+              <tr><td>Penyelesaian tugas prioritas</td><td>40%</td><td>12</td><td>9</td><td>tugas</td><td>[Unit]</td><td><span class="pill p-amber">belum disetujui</span></td></tr>
+              <tr><td>Temuan ketidaksesuaian proses</td><td>10%</td><td>0</td><td>0</td><td>temuan</td><td>[Unit]</td><td><span class="pill p-amber">belum disetujui</span><div class="sub" style="font-size:12px;margin-top:4px">nol yang diinput, bukan belum tersedia</div></td></tr>
+              <tr><td>Kepuasan pengguna layanan internal</td><td>20%</td><td>4,2</td><td><span class="muted">belum tersedia</span></td><td>skor</td><td>[Unit]</td><td><span class="pill p-gray">belum tersedia</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Pembedaan nol sungguhan dan belum tersedia mengikuti status dari modul Pengelolaan Kinerja (perlu konfirmasi).</div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">2. Tanggal dan mode sesi dialog</h2>
+        <p class="hint">Dialog dilakukan langsung dengan pegawai. Pegawai tidak perlu membawa perangkat atau mengisi apa pun selama dialog.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 220px;max-width:280px"><label class="lbl" for="tgs">Tanggal pelaksanaan dialog</label><input class="in" id="tgs" type="date" value="2026-10-29"></div>
+          <div style="flex:1 1 320px;display:flex;gap:12px;flex-wrap:wrap">
+            <label class="opt opt-on" style="flex:1 1 140px"><input type="radio" name="mode" checked> Tatap muka</label>
+            <label class="opt" style="flex:1 1 140px"><input type="radio" name="mode"> Daring</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">3. Pesan feedback atasan</h2>
+        <p class="hint">Ditulis setelah dialog. Wajib diisi. Batas karakter dikonfigurasi admin.</p>
+        <label class="lbl" for="pesan">Pesan feedback</label>
+        <textarea class="in" id="pesan" rows="6">Pelaporan tepat waktu sudah konsisten dan perlu dipertahankan. Penyelesaian tugas prioritas masih di bawah target, terutama pada dua tugas lintas unit. Saya mengharapkan koordinasi dengan unit terkait dimulai lebih awal pada triwulan berikutnya.</textarea>
+        <div class="count">243 / 2000</div>
+      </section>
+
+      <div class="soft">
+        <b>Yang terjadi setelah dikirim.</b> Status pelaksanaan menjadi Terkirim (atau Terkirim Terlambat bila lewat tenggat). Pegawai menerima notifikasi dan mengisi tanggapan serta komitmen. Anda hanya melihat status pelaksanaan milik Anda dan komitmen pegawai yang telah dikirim; status tanggapan, pilihan Setuju atau Tidak Setuju, dan alasannya tidak terlihat oleh Anda. Tidak ada unggahan foto atau lampiran pada kegiatan apa pun.
+      </div>
+
+      <div class="actions">
+        <span class="actions-note">Draf tersimpan di akun Anda dan tidak dihitung sebagai terkirim. Isi tidak dapat diubah setelah dikirim.</span>
+        <button class="btn" type="button">Simpan draf</button>
+        <button class="btn btn-p" type="button" data-go="4">Lanjut ke pengesahan</button>
+      </div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-3" data-n="3" aria-label="Empat Kondisi Panel Data (a sampai d)">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan B (contoh) · Atasan langsung</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="1">Feedback Kinerja</a>
+      <a class="nav" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Form / Panel data kinerja</div>
+        <h1 class="h1">Empat Kondisi Panel Data Kinerja</h1>
+        <p class="lead">Panel pada form selalu menampilkan apa yang tersedia saat form dibuka. Persetujuan penilaian KPI bukan syarat, sehingga atasan tetap dapat mengirim feedback pada keempat kondisi. Panel berubah sendiri begitu data tersedia, tanpa tindakan admin.</p>
+      </div>
+
+      <section class="card">
+        <h2 class="h2"><span class="tag">a</span>KPI belum ditetapkan</h2>
+        <p class="hint">Sah, karena penetapan KPI individu dapat menunggu KPI unit (Pasal 5 rancangan Perdir). Form tetap dapat diakses dan dikirim.</p>
+        <div class="info" style="padding:16px 18px;font-size:14px;line-height:1.6">
+          <b>Kinerja triwulanan masih dalam proses penentuan oleh manajemen.</b><br>
+          Mohon berikan feedback berdasarkan aktivitas sehari-hari pegawai pada triwulan ini.
+        </div>
+        <div class="note">Feedback tanpa data KPI ditandai pada laporan sebagai tanpa data KPI agar cakupannya tidak dibaca setara dengan feedback berbasis data (perlu konfirmasi).</div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2"><span class="tag">b</span>KPI sudah ditetapkan, penilaian triwulan belum final</h2>
+        <p class="hint">Realisasi yang sudah diinput tampil berlabel belum disetujui. Indikator tanpa realisasi ditandai belum tersedia. Bukan nilai akhir.</p>
+        <div style="overflow-x:auto">
+          <table class="kt">
+            <thead><tr><th>Indikator KPI</th><th>Bobot</th><th>Target</th><th>Realisasi</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>Penyelesaian tugas prioritas</td><td>40%</td><td>12</td><td>9</td><td><span class="pill p-amber">belum disetujui</span></td></tr>
+              <tr><td>Kepuasan pengguna layanan internal</td><td>20%</td><td>4,2</td><td><span class="muted">belum tersedia</span></td><td><span class="pill p-gray">belum tersedia</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2"><span class="tag">c</span>Penilaian triwulan final</h2>
+        <p class="hint">Setiap indikator memuat nama, bobot, target, realisasi, satuan, dan unit pemilik data. Nilai akhir tahun dan predikat tetap belum tersedia pada TW I sampai TW IV.</p>
+        <div style="overflow-x:auto">
+          <table class="kt">
+            <thead><tr><th>Indikator KPI</th><th>Bobot</th><th>Target</th><th>Realisasi</th><th>Satuan</th><th>Unit pemilik data</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>Penyelesaian tugas prioritas</td><td>40%</td><td>12</td><td>10</td><td>tugas</td><td>[Unit]</td><td><span class="pill p-green">disetujui</span></td></tr>
+              <tr><td>Kepuasan pengguna layanan internal</td><td>20%</td><td>4,2</td><td>4,3</td><td>skor</td><td>[Unit]</td><td><span class="pill p-green">disetujui</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Pada TW IV, nilai diberi label bukan nilai akhir karena HC dapat menyesuaikan nilai bagi pegawai yang dimutasi (Pasal 15 rancangan Perdir).</div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2"><span class="tag">d</span>Predikat tersedia (Penyampaian Predikat dan Revisi Predikat)</h2>
+        <p class="hint">Panel membaca level predikat dan nilai akhir KPI dari modul Pengelolaan Kinerja. Cara predikat diperoleh ditetapkan modul tersebut. Apakah nilai KBI dan assessment perilaku ikut tampil juga ditetapkan modul tersebut (perlu konfirmasi).</p>
+        <div class="grid-kv" style="border:1px solid #C9D2DC;border-radius:10px;padding:18px 20px">
+          <div><div class="k">Level predikat tahun penilaian 2025</div><p class="big">[Level predikat]</p></div>
+          <div><div class="k">Nilai akhir KPI</div><p class="big">93,4 <span style="font-size:13px;font-weight:600;color:#566170">(contoh)</span></p></div>
+          <div><div class="k">Versi predikat</div><p class="v">Versi 2 (menggantikan versi 1)<br><span class="sub">Tanggal memo: [tanggal dari modul Pengelolaan Kinerja]</span></p></div>
+        </div>
+      </section>
+
+      <div class="foot">Setelah atasan mengirim, kondisi panel pada saat itu dibekukan sebagai snapshot. Perubahan data sesudahnya tidak mengubah catatan dan dibandingkan pada periode berikutnya. Sistem memberi tahu atasan sebelum mengirim bila data penilaian ternyata sudah tersedia setelah form dibuka.</div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-4" data-n="4" aria-label="Pengesahan Pengiriman">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan B (contoh) · Atasan langsung</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="1">Feedback Kinerja</a>
+      <a class="nav" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Form / Pengesahan</div>
+        <h1 class="h1">Pengesahan Pengiriman</h1>
+        <p class="lead">Pengesahan berupa konfirmasi pengiriman setelah autentikasi SSO. Tanda tangan digital tidak digunakan karena persetujuan melalui sistem dipandang setara.</p>
+      </div>
+
+      <section style="background:#D5DBE3;border-radius:12px;padding:40px 24px;display:flex;justify-content:center">
+        <div role="dialog" aria-label="Konfirmasi pengiriman feedback" style="background:#fff;border-radius:12px;border:1px solid #B8C2CE;width:100%;max-width:640px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 12px 32px rgba(27,36,48,.25)">
+          <div>
+            <h2 style="margin:0;font-size:20px">Sahkan dan kirim feedback</h2>
+            <div class="sub" style="margin-top:4px">Setelah dikirim, isi tidak dapat diubah.</div>
+          </div>
+          <div class="grid-kv soft" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px 20px;padding:14px 16px;border-radius:8px">
+            <div><div class="k">Pegawai</div><p class="v">Pegawai C (contoh)</p></div>
+            <div><div class="k">Kegiatan</div><p class="v">TW III 2026</p></div>
+            <div><div class="k">Sesi dialog</div><p class="v">29 Okt 2026, tatap muka</p></div>
+            <div><div class="k">Pesan feedback</div><p class="v">243 karakter</p></div>
+            <div><div class="k">Data kinerja</div><p class="v">Dibekukan saat dikirim (kondisi b, belum final)</p></div>
+            <div><div class="k">Tenggat</div><p class="v">30 Okt 2026 (tepat waktu)</p></div>
+          </div>
+          <div class="warn" style="border-radius:8px;padding:12px 16px"><div class="warn-b"><b>Data penilaian bertambah sejak form dibuka.</b> Satu realisasi baru tersedia di modul Pengelolaan Kinerja. Tinjau ulang panel sebelum mengirim agar snapshot memuat data terbaru. Apakah snapshot diperbarui otomatis atau dipilih atasan perlu dikonfirmasi.</div></div>
+          <div style="border:1px solid #C9D2DC;border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+              <div><div class="k">Autentikasi SSO</div><p class="v">Atasan B (contoh) · sesi aktif sejak 08.52</p></div>
+              <span class="pill p-green">Terverifikasi</span>
+            </div>
+            <div class="sub" style="font-size:12.5px;line-height:1.5">Sistem mencatat pengguna, waktu, dan versi isi yang disahkan.</div>
+          </div>
+          <label style="display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;min-height:44px"><input type="checkbox" checked style="margin-top:4px"><span>Saya telah melaksanakan dialog dengan pegawai tersebut, dan saya mengesahkan pengiriman feedback ini.</span></label>
+          <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap">
+            <button class="btn" type="button" data-go="2">Kembali ke form</button>
+            <button class="btn btn-p" type="button">Sahkan dan kirim</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <h2 class="h2" style="margin:0">Setelah dikirim</h2>
+          <span class="pill p-green">Terkirim</span>
+          <span class="sub">29 Okt 2026, 09.41</span>
+        </div>
+        <ul class="ul">
+          <li>Status pelaksanaan atasan menjadi Terkirim. Bila dikirim setelah 30 Okt 2026, statusnya Terkirim Terlambat dengan penanda terlambat dan tanggal kirim.</li>
+          <li>Pegawai diminta menanggapi dalam batas waktu yang dikonfigurasi. Atasan tidak melihat status tanggapan pegawai dan tidak dihitung gagal bila pegawai belum menanggapi.</li>
+          <li>Pegawai C menerima notifikasi tanpa isi feedback pada pratinjau.</li>
+          <li>Snapshot data kinerja, posisi, atasan, dan unit kerja dibekukan.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-5" data-n="5" aria-label="Baca Feedback dan Tanggapi">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Pegawai A (contoh) · Pegawai</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="5">Feedback Kinerja</a>
+      <a class="nav">Riwayat saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / TW III 2026 / Tanggapan</div>
+        <h1 class="h1">Feedback Kinerja TW III 2026</h1>
+      </div>
+
+      <div class="warn">
+        <div class="warn-t">Siapa yang dapat membaca tanggapan Anda</div>
+        <div class="warn-b">Pilihan Setuju atau Tidak Setuju, alasannya, dan jawaban konfirmasi dialog hanya dapat dibaca oleh Anda dan PIC HCP. Atasan langsung tidak melihatnya. Komitmen Anda terlihat oleh atasan, Anda, dan PIC HCP. Tindak lanjut PIC HCP atas tanggapan Tidak Setuju dapat membuat atasan mengetahui adanya ketidaksetujuan (perlu konfirmasi). Teks yang Anda tulis dapat diproses sistem kecerdasan buatan sebagai sinyal awal bagi PIC HCP.</div>
+      </div>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+          <h2 class="h2" style="margin:0">1. Feedback dari atasan</h2>
+          <span class="pill p-gray">Status tanggapan: Menunggu</span>
+        </div>
+        <div class="grid-kv" style="gap:12px 24px">
+          <div><div class="k">Atasan</div><p class="v">Atasan B (contoh)</p></div>
+          <div><div class="k">Sesi dialog</div><p class="v">27 Okt 2026, tatap muka</p></div>
+          <div><div class="k">Dikirim</div><p class="v">27 Okt 2026, 16.20 (tepat waktu)</p></div>
+        </div>
+        <div class="soft" style="border-radius:8px;padding:14px 16px">
+          <div class="k">Pesan feedback</div>
+          <p style="margin:0;font-size:14px;line-height:1.6">Pelaporan tepat waktu sudah konsisten dan perlu dipertahankan. Penyelesaian tugas prioritas masih di bawah target, terutama pada dua tugas lintas unit. Saya mengharapkan koordinasi dengan unit terkait dimulai lebih awal pada triwulan berikutnya.</p>
+        </div>
+        <div>
+          <div class="k">Data kinerja pada saat feedback dikirim (snapshot)</div>
+          <div style="overflow-x:auto">
+            <table class="kt">
+              <thead><tr><th>Indikator KPI</th><th>Bobot</th><th>Target</th><th>Realisasi</th><th>Keterangan</th></tr></thead>
+              <tbody>
+                <tr><td>Kepatuhan pelaporan tepat waktu</td><td>30%</td><td>100</td><td>96</td><td><span class="pill p-amber">belum disetujui</span></td></tr>
+                <tr><td>Penyelesaian tugas prioritas</td><td>40%</td><td>12</td><td>9</td><td><span class="pill p-amber">belum disetujui</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">2. Tanggapan Anda atas isi feedback</h2>
+        <p class="hint">Wajib dipilih. Alasan tertulis wajib diisi bila memilih Tidak Setuju.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <label class="opt" style="flex:1 1 200px"><input type="radio" name="tg"> Setuju</label>
+          <label class="opt opt-on" style="flex:1 1 200px"><input type="radio" name="tg" checked> Tidak Setuju</label>
+        </div>
+        <div class="info" style="margin-bottom:16px"><b>Tidak Setuju bukan keberatan atas nilai atau predikat.</b> Pilihan ini adalah tanggapan atas isi feedback dan diteruskan kepada PIC HCP. Keberatan atau permohonan koreksi atas nilai atau predikat mengikuti Pasal 29 dan Pasal 37 rancangan Perdir, di luar sistem.</div>
+        <label class="lbl" for="alasan">Alasan Tidak Setuju</label>
+        <textarea class="in" id="alasan" rows="4">Saya setuju dengan catatan pelaporan. Dua tugas lintas unit tertunda karena menunggu data dari unit lain, bukan karena koordinasi saya terlambat.</textarea>
+        <div class="count">149 / 1000</div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">3. Konfirmasi pelaksanaan dialog</h2>
+        <p class="hint">Sistem menanyakan apakah dialog benar dilaksanakan seperti yang dicatat atasan. Jawaban Anda tidak terlihat oleh atasan (perlu konfirmasi sebagai kontrol utama pengganti bukti foto).</p>
+        <div style="font-size:14px;margin-bottom:10px">Apakah dialog dilaksanakan pada <b>27 Okt 2026</b> secara <b>tatap muka</b>?</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <label class="opt opt-on" style="flex:1 1 200px"><input type="radio" name="kf" checked> Ya, sesuai catatan</label>
+          <label class="opt" style="flex:1 1 200px"><input type="radio" name="kf"> Tidak sesuai</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">4. Komitmen Anda</h2>
+        <p class="hint">Tindakan tertulis sebagai respons atas feedback. Wajib diisi dan terlihat oleh atasan.</p>
+        <label class="lbl" for="kom">Komitmen tindakan</label>
+        <textarea class="in" id="kom" rows="3">Mulai koordinasi dengan dua unit terkait pada minggu pertama Desember 2026 dan melaporkan hasilnya kepada atasan setiap dua minggu.</textarea>
+      </section>
+
+      <div class="actions">
+        <span class="actions-note">Batas waktu tanggapan: 3 hari kerja sejak feedback dikirim, nilai bawaan (sisa 2 hari kerja). Pengesahan melalui konfirmasi pengiriman setelah autentikasi SSO.</span>
+        <button class="btn" type="button">Simpan draf</button>
+        <button class="btn btn-p" type="button">Lanjut ke pengesahan</button>
+      </div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-6" data-n="6" aria-label="Penyampaian Predikat">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan B (contoh) · Atasan langsung</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav nav-on" data-go="1">Feedback Kinerja</a>
+      <a class="nav" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Antrean / Pegawai A</div>
+        <h1 class="h1">Penyampaian Predikat 2025</h1>
+        <p class="lead">Kegiatan terpisah dari TW IV. Dibentuk saat level predikat dirilis di modul Pengelolaan Kinerja. Dasar kewajiban penyampaian predikat tidak tercantum pada rancangan Perdir, sehingga ditetapkan sebagai ketentuan modul (perlu konfirmasi).</p>
+      </div>
+
+      <div class="warn">
+        <div class="warn-t">Batas penyampaian: [dikonfigurasi admin] (diusulkan tidak melewati jendela koreksi 30 hari kalender sejak tanggal memo, perlu konfirmasi)</div>
+        <div class="warn-b">Pegawai dapat mengajukan koreksi atau keberatan atas predikat sesuai Pasal 29 dan Pasal 37 rancangan Perdir, di luar sistem. Feedback ini tidak mengubah nilai atau predikat. Isi bersifat rahasia dan dapat diproses sistem kecerdasan buatan sebagai sinyal awal bagi PIC HCP.</div>
+      </div>
+
+      <section class="card grid-kv">
+        <div><div class="k">Pegawai</div><p class="v">Pegawai A (contoh)</p></div>
+        <div><div class="k">Posisi dan unit kerja</div><p class="v">[Jabatan] · [Unit kerja]</p></div>
+        <div><div class="k">Kegiatan</div><p class="v">Penyampaian Predikat · tahun penilaian 2025</p></div>
+        <div><div class="k">Dirilis</div><p class="v">[Tanggal rilis dari modul Pengelolaan Kinerja]</p></div>
+        <div><div class="k">Tenggat</div><p class="v">[Tanggal sesuai konfigurasi]</p></div>
+        <div><div class="k">Status pelaksanaan</div><p class="v"><span class="pill p-amber">Belum</span></p></div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">1. Predikat pegawai (hanya baca)</h2>
+        <p class="hint">Dibaca dari modul Pengelolaan Kinerja dan dibekukan sebagai snapshot saat feedback dikirim.</p>
+        <div class="grid-kv" style="border:1px solid #C9D2DC;border-radius:10px;padding:18px 20px">
+          <div><div class="k">Level predikat</div><p class="big">[Level predikat]</p></div>
+          <div><div class="k">Nilai akhir KPI</div><p class="big">93,4 <span style="font-size:13px;font-weight:600;color:#566170">(contoh)</span></p></div>
+          <div><div class="k">Versi predikat</div><p class="v">Versi 1<br><span class="sub">Tanggal memo: [dari modul Pengelolaan Kinerja]</span></p></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">2. Tanggal dan mode sesi dialog</h2>
+        <p class="hint">Dialog boleh dilakukan dalam satu sesi dengan feedback TW I tahun berjalan, tetapi dicatat sebagai dua kegiatan terpisah (perlu konfirmasi). Tidak ada unggah foto; pegawai akan diminta mengonfirmasi bahwa dialog terlaksana pada tanggal ini (perlu konfirmasi).</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 220px;max-width:280px"><label class="lbl" for="tgs6">Tanggal pelaksanaan dialog</label><input class="in" id="tgs6" type="date" value="2026-03-12"></div>
+          <div style="flex:1 1 320px;display:flex;gap:12px;flex-wrap:wrap">
+            <label class="opt opt-on" style="flex:1 1 140px"><input type="radio" name="mode6" checked> Tatap muka</label>
+            <label class="opt" style="flex:1 1 140px"><input type="radio" name="mode6"> Daring</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">3. Penjelasan predikat dan pesan feedback</h2>
+        <p class="hint">Jelaskan dasar kinerja yang melandasi predikat dan harapan ke depan. Wajib diisi.</p>
+        <label class="lbl" for="pesan6">Pesan feedback</label>
+        <textarea class="in" id="pesan6" rows="6">Predikat tahun 2025 mencerminkan capaian KPI yang stabil, dengan catatan pada penyelesaian tugas lintas unit. Pada 2026 saya mengharapkan inisiatif koordinasi lebih awal dan saya siap membantu membuka akses ke unit terkait.</textarea>
+        <div class="count">232 / 2000</div>
+      </section>
+
+      <div class="soft">
+        <b>Bila predikat berubah.</b> HCP dapat mengunggah ulang predikat di modul Pengelolaan Kinerja, baik massal, sebagian, maupun satu pegawai. Hanya pegawai yang level predikatnya berubah yang dibuka kembali, sebagai kegiatan Revisi Predikat baru dengan jendela sendiri. Feedback ini tetap tersimpan utuh dan tetap terhitung terpenuhi pada periode aslinya.
+      </div>
+
+      <div class="actions">
+        <span class="actions-note">Pengesahan melalui konfirmasi pengiriman setelah autentikasi SSO. Isi tidak dapat diubah setelah dikirim.</span>
+        <button class="btn" type="button">Simpan draf</button>
+        <button class="btn btn-p" type="button" data-go="4">Lanjut ke pengesahan</button>
+      </div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-7" data-n="7" aria-label="Pemantauan dan Analisis AI">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">PIC HCP (contoh) · Menu admin, peran PIC HCP</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <div class="nav-h">Feedback Kinerja</div>
+      <a class="nav nav-on" data-go="7">Pemantauan dan analisis</a>
+      <a class="nav" data-go="8">Tanggapan Tidak Setuju</a>
+      <a class="nav" data-go="11">Aturan analisis AI</a>
+      <a class="nav" data-go="9">Pengaturan</a>
+      <div class="nav-h">Modul lain</div>
+      <a class="nav">Coaching</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Admin / Feedback Kinerja / Pemantauan dan analisis</div>
+        <h1 class="h1">Pemantauan Feedback Kinerja</h1>
+        <p class="lead">Menu PIC HCP berada pada menu admin yang sama dan dibatasi per peran. Hanya peran PIC HCP yang melihat dan menjalankan analisis AI (perlu konfirmasi). Angka pada layar ini contoh.</p>
+      </div>
+
+      <section class="card">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 200px"><label class="lbl" for="keg7">Kegiatan</label><select class="in" id="keg7"><option>TW III 2026</option><option>Penyampaian Predikat 2025</option><option>Revisi Predikat 2025</option></select></div>
+          <div style="flex:1 1 200px"><label class="lbl" for="unit7">Unit kerja</label><select class="in" id="unit7"><option>Semua unit kerja</option></select></div>
+          <div style="flex:1 1 200px"><label class="lbl" for="kat7">Kategori</label><select class="in" id="kat7"><option>Semua</option><option>Tanpa data KPI</option></select></div>
+        </div>
+      </section>
+
+      <section style="display:flex;gap:12px;flex-wrap:wrap">
+        <div class="stat sm"><div class="stat-k">Cakupan pelaksanaan</div><div class="stat-v">81%</div><div class="stat-s">1.620 dari 2.000 yang berlaku</div></div>
+        <div class="stat sm"><div class="stat-k">Terkirim Terlambat</div><div class="stat-v">142</div><div class="stat-s">sudah termasuk cakupan</div></div>
+        <div class="stat sm"><div class="stat-k">Belum atau Tidak Dilaksanakan</div><div class="stat-v">380</div><div class="stat-s">terhadap tenggat jendela</div></div>
+        <div class="stat sm"><div class="stat-k">Tidak Berlaku</div><div class="stat-v">96</div><div class="stat-s">dilaporkan per alasan</div></div>
+        <div class="stat sm"><div class="stat-k">Tidak Setuju belum ditinjau</div><div class="stat-v">7</div><div class="stat-s">diteruskan tanpa menunggu AI</div></div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">Cakupan per unit kerja</h2><p class="hint">Tidak Berlaku tidak dihitung pada penyebut. Feedback tanpa data KPI dibedakan dari feedback berbasis data, dan dipisah antara data belum ada sampai tenggat dan data baru tersedia setelah dikirim.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb">
+            <thead><tr><th>Unit kerja</th><th>Berlaku</th><th>Terkirim</th><th>Terlambat</th><th>Belum dan Tidak Dilaksanakan</th><th>Tidak Berlaku</th><th>Tanpa data KPI</th><th>Ditanggapi</th><th>Cakupan</th></tr></thead>
+            <tbody>
+              <tr><td>[Unit kerja 1]</td><td>420</td><td>350</td><td>31</td><td>39</td><td>18</td><td>44</td><td>301</td><td><b>91%</b></td></tr>
+              <tr><td>[Unit kerja 2]</td><td>310</td><td>221</td><td>28</td><td>61</td><td>9</td><td>112</td><td>196</td><td><b>80%</b></td></tr>
+              <tr><td>[Unit kerja 3]</td><td>275</td><td>170</td><td>19</td><td>86</td><td>14</td><td>35</td><td>150</td><td><b>69%</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">Tanggapan pegawai yang tidak diberikan</h2><p class="hint">Catatan berstatus Tidak Ditanggapi tidak dianalisis AI dan tidak mengurangi cakupan atasan. Atasan tidak melihat status ini. PIC HCP dapat membuka kembali tanggapan untuk pegawai tertentu dengan mencatat alasan; status kembali menjadi Menunggu dengan batas waktu baru.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb">
+            <thead><tr><th>Pegawai</th><th>Kegiatan</th><th>Feedback dikirim</th><th>Batas waktu tanggapan</th><th>Status tanggapan</th><th>Tindakan</th></tr></thead>
+            <tbody>
+              <tr><td>Pegawai P (contoh)</td><td>TW II 2026</td><td>24 Jul 2026</td><td>29 Jul 2026</td><td><span class="pill p-gray">Tidak Ditanggapi</span></td><td><button class="btn" type="button">Buka kembali</button></td></tr>
+              <tr><td>Pegawai Q (contoh)</td><td>Penyampaian Predikat 2025</td><td>5 Mar 2026</td><td>10 Mar 2026</td><td><span class="pill p-gray">Tidak Ditanggapi</span></td><td><button class="btn" type="button">Buka kembali</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:16px 24px 20px;border-top:1px solid #E6EAF0">
+          <label class="lbl" for="alasanbuka">Alasan membuka kembali (wajib dicatat)</label>
+          <input class="in" id="alasanbuka" type="text" value="Contoh: pegawai sedang cuti panjang pada masa batas waktu tanggapan">
+        </div>
+      </section>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div>
+          <h2 class="h2">Cakupan analisis AI</h2>
+          <p class="hint" style="margin:0">Hanya catatan berstatus Ditanggapi yang dapat dianalisis. Daftar kasus perlu review manual belum lengkap sebelum seluruh catatan dianalisis, sehingga catatan yang belum dianalisis tidak boleh dibaca sebagai tidak bermasalah.</p>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;margin-bottom:6px"><b>1.120 dari 1.340 catatan Ditanggapi sudah dianalisis (84%)</b><span class="sub">Batch terjadwal berikutnya: [Senin, jam dikonfigurasi] (perlu konfirmasi)</span></div>
+          <div style="display:flex;height:14px;border-radius:999px;overflow:hidden;background:#E6EAF0">
+            <div style="width:84%;background:#0B5CAD"></div><div style="width:1%;background:#8A4B00"></div><div style="width:1%;background:#8A1C14"></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="pill p-gray">Belum Dianalisis 190</span>
+          <span class="pill p-amber">Sedang Diproses 12</span>
+          <span class="pill p-green">Selesai 1.120</span>
+          <span class="pill p-red">Gagal 18</span>
+          <span class="pill p-blue">Hasil usang 0</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">Jalankan analisis AI</h2>
+        <p class="hint">Analisis dijalankan satu kali per catatan dan hasilnya disimpan, tidak dihitung ulang setiap kali dibuka. Catatan yang gagal dapat diulang. Hasil yang usang karena perubahan metode hanya dijalankan ulang secara sengaja (perlu konfirmasi).</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 240px"><label class="lbl" for="lingkup">Lingkup</label><select class="in" id="lingkup"><option>Seluruh catatan yang belum dianalisis</option><option>Satu unit kerja</option><option>Satu periode</option><option>Satu catatan</option></select></div>
+          <div style="flex:1 1 200px"><label class="lbl" for="per">Periode</label><select class="in" id="per"><option>TW III 2026</option></select></div>
+        </div>
+        <div class="info" style="padding:14px 18px;margin-top:16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+          <div style="font-size:14px;line-height:1.55"><b>190 catatan</b> berstatus Ditanggapi akan dianalisis. 18 berstatus Gagal ikut diulang bila dipilih.<br>Proses berjalan di latar belakang dan statusnya tampil per catatan.</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="button">Batal</button><button class="btn btn-p" type="button">Konfirmasi dan jalankan</button></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-8" data-n="8" aria-label="Detail Catatan, Hasil AI, Kategori Opsional">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">PIC HCP (contoh) · Menu admin, peran PIC HCP</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <div class="nav-h">Feedback Kinerja</div>
+      <a class="nav" data-go="7">Pemantauan dan analisis</a>
+      <a class="nav nav-on" data-go="8">Tanggapan Tidak Setuju</a>
+      <a class="nav" data-go="11">Aturan analisis AI</a>
+      <a class="nav" data-go="9">Pengaturan</a>
+      <div class="nav-h">Modul lain</div>
+      <a class="nav">Coaching</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Admin / Feedback Kinerja / Tanggapan Tidak Setuju / FBK-2026-TW3-0142</div>
+        <h1 class="h1">Detail Catatan Feedback Kinerja</h1>
+      </div>
+
+      <section class="card grid-kv">
+        <div><div class="k">Pegawai</div><p class="v">Pegawai A (contoh)</p></div>
+        <div><div class="k">Atasan</div><p class="v">Atasan B (contoh)</p></div>
+        <div><div class="k">Kegiatan</div><p class="v">TW III 2026</p></div>
+        <div><div class="k">Status pelaksanaan atasan</div><p class="v"><span class="pill p-green">Terkirim</span> 27 Okt 2026</p></div>
+        <div><div class="k">Status tanggapan pegawai</div><p class="v"><span class="pill p-blue">Ditanggapi</span> 28 Okt 2026</p></div>
+      </section>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div><h2 class="h2">1. Isi catatan</h2><p class="hint" style="margin:0">PIC HCP dapat membaca seluruh isi, termasuk bagian yang tidak terlihat oleh atasan.</p></div>
+        <div><div class="k">Pesan feedback atasan</div><p class="box">Pelaporan tepat waktu sudah konsisten dan perlu dipertahankan. Penyelesaian tugas prioritas masih di bawah target, terutama pada dua tugas lintas unit. Saya mengharapkan koordinasi dengan unit terkait dimulai lebih awal pada triwulan berikutnya.</p></div>
+        <div>
+          <div class="k">Tanggapan pegawai <span class="pill p-red" style="margin-left:6px">Tidak Setuju</span></div>
+          <p class="box">Saya setuju dengan catatan pelaporan. Dua tugas lintas unit tertunda karena menunggu data dari unit lain, bukan karena koordinasi saya terlambat.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+          <div><div class="k">Konfirmasi pelaksanaan dialog (pegawai)</div><p class="box">Ya, sesuai catatan: 27 Okt 2026, tatap muka</p></div>
+          <div><div class="k">Komitmen pegawai</div><p class="box">Mulai koordinasi dengan dua unit terkait pada minggu pertama Desember 2026 dan melaporkan hasilnya kepada atasan setiap dua minggu.</p></div>
+        </div>
+      </section>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap">
+          <div><h2 class="h2">2. Hasil analisis AI</h2><p class="hint" style="margin:0;max-width:640px">Sinyal awal bagi PIC HCP, bukan kesimpulan. Tidak digunakan sebagai dasar penetapan predikat, mutasi, atau keputusan kepegawaian lainnya. Hanya terbaca oleh PIC HCP.</p></div>
+          <button class="btn" type="button">Jalankan ulang (hanya bila usang atau gagal)</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span class="k" style="margin:0 4px 0 0">Status analisis</span>
+          <span class="pill p-gray" style="color:#566170">Belum Dianalisis</span>
+          <span class="pill p-gray" style="color:#566170">Sedang Diproses</span>
+          <span class="pill p-green">Selesai</span>
+          <span class="pill p-gray" style="color:#566170">Gagal</span>
+        </div>
+        <div class="grid-kv" style="border:1px solid #C9D2DC;border-radius:10px;padding:16px 20px">
+          <div><div class="k">Skor keselarasan</div><p style="margin:0;font-size:22px;font-weight:800">[Skor]</p></div>
+          <div><div class="k">Status keselarasan</div><p style="margin:0"><span class="pill p-amber">Sebagian Selaras</span></p></div>
+          <div><div class="k">Penanda</div><p style="margin:0"><span class="pill p-red">Perlu review manual</span></p></div>
+          <div><div class="k">Versi model dan metode</div><p class="v">[Versi]<br><span class="sub" style="font-size:12.5px">Dianalisis 29 Okt 2026 · konteks: snapshot panel TW III</span></p></div>
+        </div>
+        <div><div class="k">Flag</div><ul class="ul"><li>Alasan pegawai merujuk kendala lintas unit yang tidak dibahas pada pesan atasan.</li><li>Komitmen pegawai konkret dan memiliki tenggat.</li></ul></div>
+        <div class="sub" style="font-size:12.5px;line-height:1.5">Ambang status keselarasan ditetapkan HC. Hasil disimpan terpisah dari isi catatan dan tidak dihitung ulang setiap dibuka. Kriteria dan skoring mengikuti bagian 2.1.8 dan Lampiran 4.3.</div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">3. Kategori dan catatan administrasi PIC HCP (opsional)</h2>
+        <p class="hint">Secara bawaan PIC HCP tidak menindaklanjuti secara proaktif. Kategori dan catatan diisi hanya bila ada kasus yang ditindaklanjuti, misalnya masalahnya berat. Tidak ada status proses (belum, sedang, selesai) dan tidak ada kewajiban mengisi. Hanya terbaca PIC HCP. Daftar kategori, hak baca pegawai, dan masa retensi perlu dikonfirmasi.</p>
+        <div style="max-width:360px;margin-bottom:16px">
+          <label class="lbl" for="kt8">Kategori tindak lanjut (daftar perlu konfirmasi)</label>
+          <select class="in" id="kt8">
+            <option selected>Tidak ditindaklanjuti (bawaan)</option>
+            <option>Dialog dengan pegawai</option>
+            <option>Dialog dengan atasan</option>
+            <option>Dialog dengan pegawai dan atasan</option>
+            <option>Dirujuk ke pihak lain</option>
+          </select>
+        </div>
+        <label class="lbl" for="cat8">Catatan</label>
+        <textarea class="in" id="cat8" rows="4" placeholder="Kosongkan bila tidak ada yang perlu dicatat"></textarea>
+        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px">
+          <button class="btn" type="button">Simpan</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-9" data-n="9" aria-label="Pengaturan Jendela, Pengingat, dan Batch AI">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Admin HC (contoh) · Menu admin</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <div class="nav-h">Feedback Kinerja</div>
+      <a class="nav" data-go="7">Pemantauan dan analisis</a>
+      <a class="nav" data-go="8">Tanggapan Tidak Setuju</a>
+      <a class="nav" data-go="11">Aturan analisis AI</a>
+      <a class="nav nav-on" data-go="9">Pengaturan</a>
+      <div class="nav-h">Modul lain</div>
+      <a class="nav">Coaching</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Admin / Feedback Kinerja / Pengaturan</div>
+        <h1 class="h1">Pengaturan Feedback Kinerja</h1>
+        <p class="lead">Nilai dan predikat tidak diunggah atau diubah di modul ini. Unggah ulang predikat, baik massal, sebagian, maupun satu pegawai, dilakukan di modul Pengelolaan Kinerja. Angka bawaan di bawah adalah usulan.</p>
+      </div>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">1. Jendela pelaksanaan</h2><p class="hint">Mengikuti kalender, bukan persetujuan KPI, sehingga seluruh atasan memiliki jendela dan tenggat yang sama.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid">
+            <thead><tr><th>Kegiatan</th><th>Tanggal buka</th><th>Tenggat</th><th>Batas akhir kirim terlambat</th></tr></thead>
+            <tbody>
+              <tr><td>TW I</td><td><input class="in" type="text" value="1 Maret" aria-label="Buka TW I"></td><td><input class="in" type="text" value="30 April" aria-label="Tenggat TW I"></td><td rowspan="5" style="vertical-align:top;background:#FBFCFD"><label class="lbl" for="lt">Nilai awal (perlu konfirmasi)</label><input class="in" id="lt" type="text" value="30 hari kalender setelah tenggat"><div class="sub" style="font-size:12.5px;margin-top:8px;line-height:1.5">Selama masa ini status tetap Belum dengan penanda lewat tenggat. Setelahnya menjadi Tidak Dilaksanakan.</div></td></tr>
+              <tr><td>TW II</td><td><input class="in" type="text" value="1 Juni" aria-label="Buka TW II"></td><td><input class="in" type="text" value="30 Juli" aria-label="Tenggat TW II"></td></tr>
+              <tr><td>TW III</td><td><input class="in" type="text" value="1 September" aria-label="Buka TW III"></td><td><input class="in" type="text" value="30 Oktober" aria-label="Tenggat TW III"></td></tr>
+              <tr><td>TW IV</td><td><input class="in" type="text" value="1 Desember" aria-label="Buka TW IV"></td><td><input class="in" type="text" value="30 Januari (tahun berikutnya)" aria-label="Tenggat TW IV"></td></tr>
+              <tr><td>Penyampaian Predikat</td><td><span class="sub">Saat predikat dirilis di Pengelolaan Kinerja</span></td><td><input class="in" type="text" value="[Batas penyampaian]" aria-label="Tenggat Penyampaian Predikat"><div class="sub" style="font-size:12px;margin-top:4px">Usulan: tidak melewati 30 hari kalender sejak tanggal memo (Pasal 29, perlu konfirmasi)</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">2. Penggeseran tanggal per unit kerja</h2><p class="hint">Hanya bila beban ternyata timpang. Opsi ini bukan nilai bawaan. Kecukupan jendela dievaluasi setelah dua triwulan pertama (perlu konfirmasi).</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid">
+            <thead><tr><th>Unit kerja</th><th>Kegiatan</th><th>Tanggal buka</th><th>Tenggat</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>[Unit kerja 3]</td><td>TW III</td><td>1 September</td><td>7 November (geser +8 hari)</td><td><button class="btn" type="button">Hapus pergeseran</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:16px 24px"><button class="btn" type="button">Tambah pergeseran</button></div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">3. Atasan dan Tidak Berlaku</h2>
+        <p class="hint">Nilai awal hanya analogi aturan KPI pada Pasal 30 dan bukan aturan Perdir bagi feedback.</p>
+        <div class="row">
+          <div><label class="lbl" for="mg">Jumlah minggu minimum atasan membawahi pegawai pada triwulan (perlu konfirmasi)</label><input class="in" id="mg" type="number" value="7"></div>
+          <div><label class="lbl" for="bt">Batas waktu tanggapan pegawai</label><input class="in" id="bt" type="text" value="3 hari kerja setelah feedback dikirim (maksimum 5 hari kerja)"></div>
+        </div>
+        <div style="margin-top:18px">
+          <div class="lbl">Daftar alasan Tidak Berlaku (daftar perlu konfirmasi)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="pill p-blue">Atasan atau pegawai kurang dari jumlah minggu minimum</span>
+            <span class="pill p-blue">Jabatan atasan kosong</span>
+            <span class="pill p-blue">Pegawai tidak aktif bekerja pada triwulan itu</span>
+            <span class="pill p-blue">Pegawai tanpa level predikat</span>
+            <span class="pill p-gray">Alasan lain dengan keterangan (ditetapkan admin)</span>
+          </div>
+          <div style="margin-top:10px"><button class="btn" type="button">Tetapkan Tidak Berlaku manual</button> <span class="sub" style="font-size:12.5px">Apakah atasan boleh menyanggah penetapan manual perlu dikonfirmasi.</span></div>
+        </div>
+        <label class="chk" style="margin-top:16px"><input type="checkbox"> Perubahan nilai akhir KPI tanpa perubahan level predikat ikut membuka kembali Penyampaian Predikat</label>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">4. Pengingat</h2>
+        <p class="hint">Pengingat berjenjang dikirim untuk bawahan yang berstatus Belum.</p>
+        <div class="row">
+          <div><label class="lbl" for="p1">Saat jendela terbuka</label><input class="in" id="p1" type="text" value="Hari buka, atasan berstatus Belum"></div>
+          <div><label class="lbl" for="p2">Menjelang tenggat</label><input class="in" id="p2" type="text" value="[n] hari sebelum tenggat"></div>
+          <div><label class="lbl" for="p3">Setelah tenggat</label><input class="in" id="p3" type="text" value="[n] hari setelah tenggat sampai batas akhir"></div>
+        </div>
+        <div class="lbl" style="margin-top:20px">Pengingat kepada pegawai yang belum menanggapi</div>
+        <p class="hint">Hanya dikirim kepada pegawai berstatus Menunggu dan berhenti begitu pegawai menanggapi. Isi pengingat netral: hanya memberitahukan ada feedback yang menunggu tanggapan beserta batas waktunya, tanpa isi feedback dan tanpa pilihan tanggapan. Tidak ada eskalasi kepada atasan maupun PIC HCP.</p>
+        <div class="row">
+          <div><label class="lbl" for="p4">Titik pengingat</label><input class="in" id="p4" type="text" value="[n] hari kerja sebelum batas waktu tanggapan"></div>
+          <div><label class="lbl" for="p5">Jumlah maksimum pengingat per catatan</label><input class="in" id="p5" type="text" value="[n] kali"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">5. Batch analisis AI terjadwal</h2>
+        <p class="hint">Pelengkap pemicu manual PIC HCP supaya kasus tidak menunggu sampai ada yang membuka laporan. Batch hanya memproses catatan berstatus Ditanggapi yang belum dianalisis. Hasilnya hanya terbaca PIC HCP. Pengaturan ini perlu dikonfirmasi seluruhnya.</p>
+        <div class="row">
+          <div><label class="lbl" for="fr">Frekuensi (usulan mingguan)</label><select class="in" id="fr"><option>Mingguan</option><option>Harian</option><option>Dimatikan</option></select></div>
+          <div><label class="lbl" for="hr">Hari dan jam</label><input class="in" id="hr" type="text" value="Senin, 01.00"></div>
+          <div><label class="lbl" for="bc">Batas jumlah catatan per eksekusi</label><input class="in" id="bc" type="text" value="[jumlah]"></div>
+        </div>
+        <div class="note">Pembatasan peran pada menu admin bersama: hanya PIC HCP yang dapat melihat dan menjalankan analisis. Peran admin lain tidak.</div>
+      </section>
+
+      <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap">
+        <button class="btn" type="button">Batal</button>
+        <button class="btn btn-p" type="button">Simpan pengaturan</button>
+      </div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-10" data-n="10" aria-label="Riwayat Bawahan dan Atasan Pengganti">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">Atasan K (contoh) · Atasan langsung sejak 1 Okt 2026</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <a class="nav">Coaching</a>
+      <a class="nav" data-go="1">Feedback Kinerja</a>
+      <a class="nav nav-on" data-go="10">Tim saya</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Pengembangan Diri / Feedback Kinerja / Riwayat bawahan / Pegawai L</div>
+        <h1 class="h1">Riwayat Feedback Pegawai L (contoh)</h1>
+        <p class="lead">Atasan baru membaca riwayat dari atasan sebelumnya sejak menjadi atasan langsung, tanpa menunggu kegiatan berstatus berlaku, sehingga tidak memulai dari nol. Kewajiban kegiatan yang jendelanya sedang terbuka berpindah ke atasan saat ini.</p>
+      </div>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">Riwayat kegiatan</h2><p class="hint">Status pelaksanaan ditampilkan sesuai atasan yang berkewajiban saat tenggat jatuh.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb" style="min-width:860px">
+            <thead><tr><th>Kegiatan</th><th>Atasan yang berkewajiban</th><th>Status pelaksanaan</th><th>Isi</th></tr></thead>
+            <tbody>
+              <tr><td>TW III 2026<div class="sub">tenggat 30 Okt 2026</div></td><td>Atasan K (contoh)</td><td><span class="pill p-amber">Belum</span></td><td><button class="btn" type="button" data-go="2">Isi feedback</button></td></tr>
+              <tr><td>TW II 2026<div class="sub">tenggat 30 Jul 2026</div></td><td>Atasan M (sebelumnya)</td><td><span class="pill p-green">Terkirim Terlambat</span><div class="sub" style="margin-top:4px">dikirim 12 Agu 2026, 13 hari setelah tenggat</div></td><td><button class="btn" type="button">Baca riwayat</button></td></tr>
+              <tr><td>Revisi Predikat 2025<div class="sub">tertaut ke Penyampaian Predikat 2025</div></td><td>Atasan M (sebelumnya)</td><td><span class="pill p-green">Terkirim</span><div class="sub" style="margin-top:4px">dikirim 20 Mar 2026</div></td><td><button class="btn" type="button">Baca riwayat</button></td></tr>
+              <tr><td>Penyampaian Predikat 2025<div class="sub">versi sebelumnya, tetap utuh</div></td><td>Atasan M (sebelumnya)</td><td><span class="pill p-green">Terkirim</span><div class="sub" style="margin-top:4px">dikirim 5 Mar 2026</div></td><td><button class="btn" type="button">Baca riwayat</button></td></tr>
+              <tr><td>TW I 2026<div class="sub">tenggat 30 Apr 2026</div></td><td>Atasan M (sebelumnya)</td><td><span class="pill p-gray">Tidak Berlaku</span><div class="sub" style="margin-top:4px;max-width:240px">Alasan: pegawai baru masuk, kurang dari jumlah minggu minimum (perlu konfirmasi)</div></td><td><span class="muted">Tidak ada isi</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 24px" class="sub">Pelaksanaan awal Penyampaian Predikat tetap terhitung terpenuhi pada laporan periode aslinya. Revisi Predikat dilaporkan terpisah, sehingga atasan yang telah menyelesaikan feedback tidak berubah menjadi Belum.</div>
+      </section>
+
+      <section class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap">
+          <div><h2 class="h2">Baca riwayat: TW II 2026 dari Atasan M</h2><p class="hint" style="margin:0">Dikirim 12 Agu 2026 · sesi 10 Agu 2026, tatap muka</p></div>
+          <span class="pill p-green">Terkirim Terlambat</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+          <div><div class="k">Pesan feedback dari atasan sebelumnya</div><p class="box">Penyelesaian tugas triwulan ini baik. Perlu peningkatan pada dokumentasi hasil kerja agar dapat dipakai ulang oleh rekan.</p></div>
+          <div><div class="k">Komitmen pegawai</div><p class="box">Menyusun templat dokumentasi hasil kerja dan membagikannya kepada tim sebelum akhir Q3.</p></div>
+        </div>
+        <div>
+          <div class="k">Data kinerja pada snapshot</div>
+          <div style="overflow-x:auto"><table class="tb" style="min-width:640px"><thead><tr><th>Indikator KPI</th><th>Bobot</th><th>Target</th><th>Realisasi</th><th>Keterangan</th></tr></thead><tbody><tr><td>Penyelesaian tugas prioritas</td><td>40%</td><td>12</td><td>12</td><td><span class="pill p-green">disetujui</span></td></tr></tbody></table></div>
+        </div>
+        <div>
+          <div class="k">Tidak ditampilkan kepada atasan pengganti</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+            <div class="hid">Pilihan Setuju atau Tidak Setuju beserta alasannya</div>
+            <div class="hid">Konfirmasi pelaksanaan dialog oleh pegawai</div>
+            <div class="hid">Hasil analisis AI</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="foot">Jabatan atasan yang kosong atau dijabat pelaksana tugas mengikuti data modul Struktur Organisasi (perlu konfirmasi). Atasan yang membawahi pegawai kurang dari jumlah minggu minimum pada suatu triwulan tidak diwajibkan dan kegiatannya berstatus Tidak Berlaku beserta alasannya.</div>
+
+    </main>
+  </div>
+</section><section class="board" id="bd-11" data-n="11" aria-label="Pengaturan Aturan Analisis AI">
+  <header class="app-h"><div class="app-brand"><b>SMILE-HC</b><span>Human Capital Information System</span></div><div class="app-user">PIC HCP (contoh) · Menu admin, peran PIC HCP</div></header>
+  <div class="app-body">
+    <nav class="app-nav">
+      <a class="nav">Beranda</a>
+      <div class="nav-h">Feedback Kinerja</div>
+      <a class="nav" data-go="7">Pemantauan dan analisis</a>
+      <a class="nav" data-go="8">Tanggapan Tidak Setuju</a>
+      <a class="nav nav-on" data-go="11">Aturan analisis AI</a>
+      <a class="nav" data-go="9">Pengaturan</a>
+      <div class="nav-h">Modul lain</div>
+      <a class="nav">Coaching</a>
+    </nav>
+    <main class="app-main">
+      <div>
+        <div class="crumb">Admin / Feedback Kinerja / Aturan analisis AI</div>
+        <h1 class="h1">Aturan Analisis AI Feedback Kinerja</h1>
+        <p class="lead">Hanya peran PIC HCP yang melihat dan mengubah aturan ini (perlu konfirmasi). Seluruh angka bawaan adalah nilai awal usulan HC dan perlu konfirmasi. Kriteria penilaian, instruksi (prompt), dan model AI tidak termasuk menu ini (perlu konfirmasi).</p>
+      </div>
+
+      <section class="card" style="display:flex;gap:16px 32px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <span class="pill p-green">Versi kebijakan aktif: v1</span>
+          <span class="small">Nilai awal usulan HC. Ada 1 perubahan yang belum disimpan (lihat kartu Perubahan yang belum disimpan).</span>
+        </div>
+        <div class="small" style="max-width:420px">Perubahan berlaku untuk analisis berikutnya. Hasil lama tidak berubah kecuali dihitung ulang dengan tindakan yang disengaja (bagian 5).</div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">1. Bobot dimensi</h2><p class="hint">Skor = jumlah (bobot x nilai) dibagi jumlah (bobot x 3), dikali 100. Bobot setara pada nilai awal. Uraian level 0 sampai 3 tiap dimensi ada pada Lampiran 4.3 dan tidak diubah di sini.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid">
+            <thead><tr><th>Dimensi</th><th>Bobot saat ini</th><th>Bobot baru</th></tr></thead>
+            <tbody>
+              <tr><td>D1 Penerimaan substansi feedback</td><td>1</td><td style="width:180px"><input class="in" type="number" value="1" aria-label="Bobot D1"></td></tr>
+              <tr><td>D2 Relevansi komitmen</td><td>1</td><td><input class="in" type="number" value="1" aria-label="Bobot D2"></td></tr>
+              <tr><td>D3 Spesifisitas komitmen</td><td>1</td><td><input class="in" type="number" value="1" aria-label="Bobot D3"></td></tr>
+              <tr><td>D4 Nada tanggapan</td><td>1</td><td><input class="in" type="number" value="1" aria-label="Bobot D4"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">2. Ambang status keselarasan</h2>
+        <p class="hint">Status ditentukan dari skor 0 sampai 100.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div style="flex:1 1 220px"><label class="lbl" for="a1">Selaras: skor minimal</label><input class="in" id="a1" type="number" value="75"></div>
+          <div style="flex:1 1 220px"><label class="lbl" for="a2">Sebagian Selaras: skor minimal</label><input class="in" id="a2" type="number" value="50"></div>
+          <div style="flex:1 1 220px"><div class="lbl">Tidak Selaras</div><div style="border:1px dashed #AEB8C4;border-radius:8px;padding:10px 12px;font-size:14px;color:#566170;background:#F7F9FB">Di bawah ambang Sebagian Selaras (otomatis)</div></div>
+        </div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">3. Aturan flag berbasis aturan</h2><p class="hint">Dihitung oleh aplikasi, bukan oleh model. Tiap aturan dapat diaktifkan atau dinonaktifkan.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid">
+            <thead><tr><th style="width:90px">Aktif</th><th>Aturan</th><th>Parameter</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox" checked aria-label="Aktifkan aturan komitmen pendek" style="width:20px;height:20px"></td><td>Komitmen terlalu singkat</td><td><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="sub">Kurang dari</span><input class="in in-chg" type="number" value="8" aria-label="Batas kata komitmen" style="width:90px"><span class="sub">kata</span><span class="pill p-blue">diubah dari 10</span></div></td></tr>
+              <tr><td><input type="checkbox" checked aria-label="Aktifkan aturan setuju tetapi menolak" style="width:20px;height:20px"></td><td>Memilih Setuju, tetapi sikap tanggapan menolak</td><td><span class="small">Tanpa parameter</span></td></tr>
+              <tr><td><input type="checkbox" checked aria-label="Aktifkan aturan tidak setuju tetapi menerima" style="width:20px;height:20px"></td><td>Memilih Tidak Setuju, tetapi sikap tanggapan menerima</td><td><span class="small">Tanpa parameter</span></td></tr>
+              <tr><td><input type="checkbox" checked aria-label="Aktifkan aturan relevansi nol" style="width:20px;height:20px"></td><td>Nilai relevansi komitmen (D2) sama dengan 0</td><td><span class="small">Tanpa parameter</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">4. Syarat penanda perlu review manual</h2>
+        <p class="hint">Kasus ditandai bila salah satu syarat aktif terpenuhi. Penanda hanya memudahkan PIC HCP menemukan kasus dan tidak mewajibkan tindakan.</p>
+        <label class="chk"><input type="checkbox" checked style="width:20px;height:20px"> Status keselarasan Tidak Selaras</label>
+        <label class="chk"><input type="checkbox" checked style="width:20px;height:20px"> Ada dimensi bernilai 0</label>
+        <label class="chk"><input type="checkbox" checked style="width:20px;height:20px"> Ada kutipan bukti yang tidak ditemukan di teks asli</label>
+        <label class="chk"><input type="checkbox" checked style="width:20px;height:20px"> Pilihan Setuju atau Tidak Setuju tidak konsisten dengan isi tanggapan</label>
+        <label class="chk"><input type="checkbox" checked style="width:20px;height:20px"> Ada flag indikatif dari AI</label>
+        <div class="small" style="margin-top:6px">Apakah syarat pemeriksaan kutipan boleh dinonaktifkan perlu dikonfirmasi, karena syarat ini menjaga agar kutipan model dapat ditelusuri ke teks asli.</div>
+      </section>
+
+      <section class="card" style="border-color:#9CC0E6">
+        <h2 class="h2">Perubahan yang belum disimpan</h2>
+        <p class="hint">Akan disimpan sebagai versi kebijakan v2 dan dicatat pada jejak audit: pengubah, waktu, nilai lama dan baru, alasan.</p>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid" style="min-width:560px">
+            <thead><tr><th>Aturan</th><th>Nilai lama</th><th>Nilai baru</th></tr></thead>
+            <tbody><tr><td>Batas jumlah kata komitmen</td><td>10 kata</td><td><b>8 kata</b></td></tr></tbody>
+          </table>
+        </div>
+        <div style="margin-top:16px">
+          <label class="lbl" for="als">Alasan perubahan (wajib diisi)</label>
+          <textarea class="in" id="als" rows="3">Komitmen yang singkat tetapi spesifik, misalnya yang memuat tanggal dan keluaran, terlalu sering ditandai pada analisis TW III.</textarea>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px">
+          <button class="btn" type="button">Batalkan perubahan</button>
+          <button class="btn btn-p" type="button">Simpan sebagai versi baru</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="h2">5. Hitung ulang hasil lama</h2>
+        <p class="hint">Dijalankan hanya secara sengaja. Perhitungan ulang memakai nilai dimensi yang sudah tersimpan dan versi kebijakan aktif, tanpa memanggil model AI. Skor, status, flag, dan penanda diperbarui. Pencatatan hasil lama pada jejak audit perlu dikonfirmasi.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1 1 240px"><label class="lbl" for="pr">Periode</label><select class="in" id="pr"><option>TW III 2026</option><option>TW II 2026</option><option>TW I 2026</option></select></div>
+          <div style="flex:1 1 240px"><label class="lbl" for="vs">Versi kebijakan yang dipakai</label><select class="in" id="vs"><option>v2 (setelah disimpan)</option><option>v1 (nilai awal)</option></select></div>
+          <div><button class="btn" type="button">Hitung ulang</button></div>
+        </div>
+        <div class="info" style="margin-top:16px">Contoh konfirmasi: <b>1.120 catatan</b> berstatus Selesai pada TW III 2026 akan dihitung ulang dengan v2. Tidak ada pemanggilan model AI.</div>
+      </section>
+
+      <section class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 24px 4px"><h2 class="h2">6. Riwayat versi kebijakan</h2><p class="hint">Setiap analisis pada jejak audit menyimpan sidik jari (hash) kebijakan yang dipakainya, sehingga skor dapat ditelusuri ke versi yang menghasilkannya.</p></div>
+        <div style="overflow-x:auto">
+          <table class="tb tb-mid">
+            <thead><tr><th>Versi</th><th>Waktu</th><th>Pengubah</th><th>Perubahan</th><th>Alasan</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>v1</td><td>[Tanggal pengaktifan]</td><td>Nilai awal usulan HC</td><td>Bobot setara, ambang 75 dan 50, batas 10 kata, seluruh flag dan penanda aktif</td><td>Konfigurasi awal</td><td><span class="pill p-green">Aktif</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</section>
+<script>
+(function(){
+  var N=11;
+  function show(n){
+    n=Math.max(1,Math.min(N,n|0||1));
+    document.querySelectorAll('.board').forEach(function(b){b.classList.toggle('on',+b.dataset.n===n);});
+    document.querySelectorAll('.mk-chip').forEach(function(c){c.classList.toggle('on',+c.dataset.go===n);});
+    document.getElementById('pick').value=String(n);
+    document.getElementById('prev').disabled=(n===1);
+    document.getElementById('next').disabled=(n===N);
+    if(location.hash!=='#board-'+n){ try{history.replaceState(null,'','#board-'+n);}catch(e){location.hash='board-'+n;} }
+    window.scrollTo(0,0);
+    cur=n;
+  }
+  var cur=1;
+  function fromHash(){ var m=/^#board-(\d+)$/.exec(location.hash); return m?+m[1]:1; }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-go]'); if(!t) return;
+    e.preventDefault(); show(+t.dataset.go);
+  });
+  document.getElementById('pick').addEventListener('change',function(){show(+this.value);});
+  document.getElementById('prev').addEventListener('click',function(){show(cur-1);});
+  document.getElementById('next').addEventListener('click',function(){show(cur+1);});
+  window.addEventListener('hashchange',function(){show(fromHash());});
+  document.addEventListener('keydown',function(e){
+    if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+    if(e.key==='ArrowRight') show(cur+1); if(e.key==='ArrowLeft') show(cur-1);
+  });
+  show(fromHash());
+})();
+</script>
+</body>
+</html>
